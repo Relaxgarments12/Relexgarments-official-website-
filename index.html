@@ -1,5 +1,3 @@
-<
-        <img src="file_0000000005e48211bac03ef53a051c50.png" alt="J-894 F/S Self JQD">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,3 +123,658 @@ nav a:hover{
     border-radius:5px;
     font-size:13px;
 }
+
+.hero-decoration{
+    font-size:90px;
+    font-weight:bold;
+    opacity:.12;
+}
+
+/* SECTIONS */
+
+section{
+    width:92%;
+    max-width:1100px;
+    margin:0 auto 35px;
+}
+
+.section-title{
+    font-size:25px;
+    margin-bottom:4px;
+}
+
+.section-subtitle{
+    color:#777;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.product-card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.product-image{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    display:block;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-brand{
+    display:inline-block;
+    background:#eef0ff;
+    padding:5px 10px;
+    border-radius:10px;
+    font-size:10px;
+    margin-bottom:9px;
+}
+
+.product-info h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.product-info p{
+    font-size:11px;
+    color:#555;
+    line-height:1.6;
+}
+
+.view-btn{
+    display:inline-block;
+    margin-top:12px;
+    background:#071021;
+    color:white;
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:5px;
+    font-size:11px;
+}
+
+/* BRANDS */
+
+.brands{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.brand-card{
+    background:#eef2ff;
+    border-radius:12px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.brand-logo{
+    width:120px;
+    height:85px;
+    background:#071021;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brand-logo img{
+    width:90%;
+    height:90%;
+    object-fit:contain;
+    background:transparent;
+}
+
+.brand-info{
+    flex:1;
+}
+
+.brand-tag{
+    display:inline-block;
+    background:#071021;
+    color:white;
+    border-radius:15px;
+    padding:5px 10px;
+    font-size:9px;
+    margin-bottom:8px;
+}
+
+.brand-info h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.brand-info p{
+    font-size:11px;
+    color:#667;
+    line-height:1.5;
+}
+
+/* CONTACT */
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.contact-card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    padding:22px;
+    min-height:150px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.contact-icon{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.contact-card h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.contact-card p{
+    font-size:11px;
+    color:#777;
+}
+
+/* HELP */
+
+.help-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.help-card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    min-height:110px;
+}
+
+.help-card h3{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.help-card p{
+    font-size:11px;
+    color:#777;
+    line-height:1.5;
+}
+
+/* ADMIN */
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.admin-card{
+    background:white;
+    padding:18px;
+    border-radius:10px;
+}
+
+.admin-card h3{
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+.admin-card p{
+    font-size:10px;
+    color:#777;
+}
+
+/* FOOTER */
+
+footer{
+    background:#071021;
+    color:white;
+    text-align:center;
+    padding:30px 10px;
+    margin-top:50px;
+}
+
+footer h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+footer p{
+    font-size:10px;
+    color:#bfc5d1;
+    margin:5px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        min-height:250px;
+        padding:30px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero-decoration{
+        display:none;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+        height:auto;
+    }
+
+    .brands{
+        grid-template-columns:1fr;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .help-grid{
+        grid-template-columns:1fr;
+    }
+
+    .admin-grid{
+        grid-template-columns:1fr;
+    }
+
+    .brand-card{
+        padding:12px;
+    }
+
+    .brand-logo{
+        width:90px;
+        height:75px;
+    }
+
+    .brand-info h3{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+India Only • Relax Garments • JACK × GETZED
+</div>
+
+<header>
+
+<div class="logo-title">
+    <img src="JCK-LOGO.png" alt="JCK Logo">
+    <div>
+        <h2>Relax Garments</h2>
+        <p>Premium Fashion Collection</p>
+    </div>
+</div>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#brands">Product Brands</a>
+    <a href="#contact">Contact</a>
+    <a href="#help">Help & Details</a>
+    <a href="#admin">Admin</a>
+</nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home">
+
+<div class="hero">
+
+<div class="hero-content">
+    <h1>STAY<br>FRESH!!!</h1>
+    <p>Let's Design Your Fashion</p>
+    <a class="hero-btn" href="#products">SHOP NOW</a>
+</div>
+
+<div class="hero-decoration">
+    RG
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products">
+
+<h2 class="section-title">Products</h2>
+<p class="section-subtitle">
+Shop the latest T-shirt collection.
+</p>
+
+<div class="products">
+
+<div class="product-card">
+
+<img
+class="product-image"
+src="file_0000000005e48211bac03ef53a051c50.png"
+alt="J-894 F/S Self JQD">
+
+<div class="product-info">
+
+<span class="product-brand">JCK</span>
+
+<h3>J-894 F/S</h3>
+
+<p>
+<strong>Item:</strong> SELF JQD<br>
+<strong>Size:</strong> L, XL, XXL<br>
+<strong>Colour:</strong> 6<br>
+<strong>Quantity:</strong> 6
+</p>
+
+<a class="view-btn" href="#products">
+View Product
+</a>
+
+</div>
+</div>
+
+
+<div class="product-card">
+
+<div style="
+height:280px;
+background:#e9edf3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+font-weight:bold;
+color:#222;
+">
+GETZED COLLECTION
+</div>
+
+<div class="product-info">
+<span class="product-brand">GETZED</span>
+<h3>GETZED Signature T-Shirt</h3>
+
+<p>
+Premium fashion T-shirt collection.<br>
+Available in multiple colours and sizes.
+</p>
+
+<a class="view-btn" href="#products">
+View Collection
+</a>
+</div>
+
+</div>
+
+
+<div class="product-card">
+
+<div style="
+height:280px;
+background:linear-gradient(135deg,#ddd,#999);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+font-weight:bold;
+color:white;
+">
+JCK COLLECTION
+</div>
+
+<div class="product-info">
+<span class="product-brand">JCK</span>
+<h3>JCK Collection T-Shirt</h3>
+
+<p>
+Premium quality fashion collection.<br>
+Modern designs and comfortable fabrics.
+</p>
+
+<a class="view-btn" href="#products">
+View Collection
+</a>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- PRODUCT BRANDS -->
+
+<section id="brands">
+
+<h2 class="section-title">Product Brands</h2>
+<p class="section-subtitle">
+Only JACK / JCK and GETZED
+</p>
+
+<div class="brands">
+
+<!-- JACK / JCK -->
+
+<div class="brand-card">
+
+<div class="brand-logo">
+<img src="JCK-LOGO.png" alt="JACK JCK Logo">
+</div>
+
+<div class="brand-info">
+
+<span class="brand-tag">PREMIUM BRAND</span>
+
+<h3>JACK / JCK</h3>
+
+<p>
+Original JACK & JCK premium fashion collection.
+Quality T-shirts, modern designs and premium fabrics.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- GETZED -->
+
+<div class="brand-card">
+
+<div class="brand-logo">
+<img src="GETZED-LOGO.png" alt="GETZED Logo">
+</div>
+
+<div class="brand-info">
+
+<span class="brand-tag">PREMIUM BRAND</span>
+
+<h3>GETZED</h3>
+
+<p>
+Premium fashion collection with stylish designs,
+quality fabrics and modern clothing.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2 class="section-title">Contact</h2>
+<p class="section-subtitle">
+Customer support and bulk orders.
+</p>
+
+<div class="contact-grid">
+
+<div class="contact-card">
+<div class="contact-icon">💬</div>
+<h3>WhatsApp Orders</h3>
+<p>Contact us for product details and bulk orders.</p>
+</div>
+
+<div class="contact-card">
+<div class="contact-icon">🛍️</div>
+<h3>Customer Support</h3>
+<p>Get help with products, orders and availability.</p>
+</div>
+
+<div class="contact-card">
+<div class="contact-icon">🇮🇳</div>
+<h3>India Delivery</h3>
+<p>Order support and delivery available across India.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HELP -->
+
+<section id="help">
+
+<h2 class="section-title">Help & Details</h2>
+<p class="section-subtitle">
+Everything you need before ordering.
+</p>
+
+<div class="help-grid">
+
+<div class="help-card">
+<h3>How to Order</h3>
+<p>
+Select a product, check details and contact us to place your order.
+</p>
+</div>
+
+<div class="help-card">
+<h3>Price & Discount</h3>
+<p>
+Product price and discount information can be displayed here.
+</p>
+</div>
+
+<div class="help-card">
+<h3>Bulk / Customized</h3>
+<p>
+JCK and GETZED products can be managed for bulk and customized orders.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin">
+
+<h2 class="section-title">Admin Features</h2>
+<p class="section-subtitle">
+Add / delete products, banners and manage discounts.
+</p>
+
+<div class="admin-grid">
+
+<div class="admin-card">
+<h3>Add Product</h3>
+<p>Add product name, image, price, colour, size and quantity.</p>
+</div>
+
+<div class="admin-card">
+<h3>Delete Product</h3>
+<p>Remove any product from the website when required.</p>
+</div>
+
+<div class="admin-card">
+<h3>Add / Delete Banner</h3>
+<p>Manage homepage banners and promotional images.</p>
+</div>
+
+<div class="admin-card">
+<h3>Discount</h3>
+<p>Set special prices, discount percentage and sale pricing.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>Relax Garments</h3>
+
+<p>JACK & GETZED – Premium Fashion Brands</p>
+
+<p>© 2026 Relax Garments. All Rights Reserved.</p>
+
+<p>
+Home • Products • Product Brands • Contact • Help & Details
+</p>
+
+</footer>
+
+</body>
+</html>
