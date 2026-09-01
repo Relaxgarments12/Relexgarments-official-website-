@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Brands - Relax Garments</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f6f8;
+  color:#111;
+}
+
+.brands-section{
+  max-width:1100px;
+  margin:50px auto;
+  padding:20px;
+}
+
+.brands-title{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.brands-subtitle{
+  color:#777;
+  margin-bottom:25px;
+}
+
+.brands-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.brand-card{
+  background:#fff;
+  border-radius:14px;
+  padding:25px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  min-height:180px;
+}
+
+.logo-box{
+  width:150px;
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:10px;
+}
+
+.logo-box img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+.brand-info h2{
+  font-size:23px;
+  margin-bottom:10px;
+}
+
+.brand-info p{
+  color:#666;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.brand-tag{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#eef1f7;
+  font-size:11px;
+  font-weight:bold;
+}
+
+@media(max-width:700px){
+  .brands-grid{
+    grid-template-columns:1fr;
+  }
+
+  .brand-card{
+    padding:18px;
+    gap:15px;
+  }
+
+  .logo-box{
+    width:110px;
+    height:100px;
+  }
+
+  .brand-info h2{
+    font-size:19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<section class="brands-section">
+
+  <h1 class="brands-title">Product Brands</h1>
+  <p class="brands-subtitle">Only JACK / JCK and GETZED</p>
+
+  <div class="brands-grid">
+
+    <!-- JACK / JCK -->
+    <div class="brand-card">
+      <div class="logo-box">
+        <img src="JCK-LOGO.png" alt="JACK JCK Logo">
+      </div>
+
+      <div class="brand-info">
+        <span class="brand-tag">PREMIUM BRAND</span>
+        <h2>JACK / JCK</h2>
+        <p>
+          Original JACK & JCK premium fashion collection.
+          Quality T-shirts, modern designs and premium fabrics.
+        </p>
+      </div>
+    </div>
+
+    <!-- GETZED -->
+    <div class="brand-card">
+      <div class="logo-box">
+        <img src="GETZED-LOGO.png" alt="GETZED Logo">
+      </div>
+
+      <div class="brand-info">
+        <span class="brand-tag">PREMIUM BRAND</span>
+        <h2>GETZED</h2>
+        <p>
+          Premium fashion collection with stylish designs,
+          quality fabrics and modern clothing.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+</body>
+  </html>
