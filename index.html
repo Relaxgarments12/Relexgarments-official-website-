@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,11 @@
 <title>Relax Garments</title>
 
 <style>
+
+/* =========================
+   BASIC
+========================= */
+
 *{
     margin:0;
     padding:0;
@@ -14,147 +20,10 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f5f6f8;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    background:#ffffff;
-    height:65px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 6%;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.logo-box{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo-box img{
-    width:42px;
-    height:42px;
-    object-fit:contain;
-}
-
-.logo-box h2{
-    font-size:20px;
     color:#111827;
 }
-
-.menu{
-    display:flex;
-    gap:25px;
-}
-
-.menu a{
-    text-decoration:none;
-    color:#222;
-    font-size:14px;
-    font-weight:600;
-}
-
-/* =========================
-   BANNER SLIDER
-========================= */
-
-.banner-section{
-    width:92%;
-    max-width:1200px;
-    margin:18px auto;
-    position:relative;
-    overflow:hidden;
-    border-radius:16px;
-    background:#111;
-}
-
-.banner-track{
-    display:flex;
-    width:500%;
-    transition:transform .8s ease-in-out;
-}
-
-.banner{
-    width:20%;
-    flex-shrink:0;
-}
-
-.banner img{
-    width:100%;
-    height:430px;
-    display:block;
-    object-fit:cover;
-}
-
-/* =========================
-   ARROWS
-========================= */
-
-.arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:42px;
-    height:42px;
-    border:0;
-    border-radius:50%;
-    background:rgba(0,0,0,.45);
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-    z-index:5;
-}
-
-.arrow:hover{
-    background:rgba(0,0,0,.75);
-}
-
-.left{
-    left:15px;
-}
-
-.right{
-    right:15px;
-}
-
-/* =========================
-   DOTS
-========================= */
-
-.dots{
-    position:absolute;
-    bottom:15px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:8px;
-    z-index:5;
-}
-
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:white;
-    opacity:.5;
-    cursor:pointer;
-}
-
-.dot.active{
-    opacity:1;
-    transform:scale(1.25);
-}
-
-/* =========================
-   CONTENT
-========================= */
 
 .container{
     width:92%;
@@ -162,43 +31,332 @@ body{
     margin:auto;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar{
+    background:#081020;
+    color:white;
+    text-align:center;
+    padding:7px;
+    font-size:12px;
+}
+
+.header{
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 4%;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.logo-text{
+    font-size:22px;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    gap:10px;
+}
+
+.menu button{
+    border:0;
+    background:#f1f3f7;
+    padding:8px 12px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+
+/* =========================
+   BANNER SLIDER
+========================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    width:100%;
+    margin:15px auto 30px;
+    border-radius:16px;
+    background:#111;
+}
+
+.slider-track{
+    display:flex;
+    width:600%;
+    transition:transform .8s ease-in-out;
+}
+
+.slide{
+    width:16.666666%;
+    flex-shrink:0;
+    height:420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#111;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Last logo slide */
+.logo-slide img{
+    object-fit:contain;
+    padding:40px;
+}
+
+
+/* =========================
+   ARROWS
+========================= */
+
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:42px;
+    height:42px;
+
+    border:0;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+    color:white;
+
+    font-size:24px;
+    cursor:pointer;
+
+    z-index:5;
+}
+
+.slider-btn:hover{
+    background:rgba(0,0,0,.8);
+}
+
+.prev{
+    left:15px;
+}
+
+.next{
+    right:15px;
+}
+
+
+/* =========================
+   DOTS
+========================= */
+
+.slider-dots{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:8px;
+
+    z-index:5;
+}
+
+.dot{
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:white;
+    opacity:.5;
+
+    cursor:pointer;
+}
+
+.dot.active{
+    opacity:1;
+    transform:scale(1.3);
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    margin-bottom:35px;
+}
+
 .section-title{
-    margin:30px 0 15px;
-}
-
-.section-title h2{
     font-size:28px;
-    color:#172033;
+    font-weight:700;
+    margin-bottom:6px;
 }
 
-.section-title p{
-    color:#777;
-    margin-top:5px;
+.section-subtitle{
+    color:#6b7280;
+    margin-bottom:18px;
 }
 
-.cards{
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:15px;
 }
 
-.card{
-    background:#fff;
+.product-card{
+    background:white;
     border-radius:12px;
-    padding:20px;
-    min-height:130px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-.card h3{
-    color:#172033;
+.product-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:14px;
+}
+
+.product-info h3{
+    margin-bottom:7px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.add-btn{
+    margin-top:12px;
+    background:#081020;
+    color:white;
+    border:0;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+
+/* =========================
+   PRODUCT BRAND
+========================= */
+
+.brands{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.brand-card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+
+.brand-logo{
+    width:110px;
+    height:90px;
+
+    background:#081020;
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.brand-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:10px;
+}
+
+.brand-info h2{
     margin-bottom:8px;
 }
 
-.card p{
-    color:#666;
+.brand-info p{
+    color:#6b7280;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.contact-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.contact-card h3{
+    margin-bottom:8px;
+}
+
+.contact-card p{
+    color:#6b7280;
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.admin-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.admin-card h3{
+    margin-bottom:8px;
+}
+
+.admin-card p{
+    color:#6b7280;
     font-size:14px;
 }
+
 
 /* =========================
    FOOTER
@@ -206,16 +364,21 @@ body{
 
 .footer{
     margin-top:50px;
-    padding:30px;
-    text-align:center;
-    background:#080f21;
+    background:#081020;
     color:white;
+    padding:35px 5%;
+    text-align:center;
+}
+
+.footer h2{
+    margin-bottom:10px;
 }
 
 .footer p{
-    margin:6px;
-    font-size:13px;
+    color:#cbd5e1;
+    margin:5px;
 }
+
 
 /* =========================
    MOBILE
@@ -224,49 +387,66 @@ body{
 @media(max-width:700px){
 
     .header{
-        height:auto;
-        padding:12px 5%;
         flex-direction:column;
-        gap:10px;
+        gap:12px;
     }
 
     .menu{
-        gap:12px;
         flex-wrap:wrap;
         justify-content:center;
     }
 
-    .menu a{
-        font-size:12px;
+    .slide{
+        height:220px;
     }
 
-    .banner-section{
-        width:94%;
-        border-radius:12px;
+    .logo-slide img{
+        padding:20px;
     }
 
-    .banner img{
-        height:210px;
-    }
-
-    .cards{
+    .products{
         grid-template-columns:1fr;
     }
 
-    .section-title h2{
+    .brands{
+        grid-template-columns:1fr;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .admin-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .section-title{
         font-size:23px;
     }
 
-    .arrow{
+    .slider-btn{
         width:34px;
         height:34px;
         font-size:18px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+    India Only • Relax Garments • JACK / JCK • GETZED
+</div>
+
 
 <!-- =========================
      HEADER
@@ -274,199 +454,513 @@ body{
 
 <header class="header">
 
-    <div class="logo-box">
-        <img src="1000586364.png" alt="Relax Garments Logo">
-        <h2>Relax Garments</h2>
+    <div class="logo-text">
+        Relax Garments
     </div>
 
     <nav class="menu">
-        <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">Product Brands</a>
-        <a href="#">Contact</a>
-        <a href="#">Help & Details</a>
-        <a href="#">Cart</a>
+        <button>Home</button>
+        <button>Products</button>
+        <button>Brands</button>
+        <button>Contact</button>
+        <button>Help</button>
+        <button>Cart</button>
     </nav>
 
 </header>
 
 
+
+<main class="container">
+
+
 <!-- =========================
-     5 BANNER AUTO SLIDER
+     6 BANNER AUTO SLIDER
 ========================= -->
 
-<section class="banner-section">
+<section class="hero" id="heroSlider">
 
-    <div class="banner-track" id="bannerTrack">
+    <div class="slider-track" id="sliderTrack">
+
 
         <!-- BANNER 1 -->
-        <div class="banner">
-            <img src="1000586365.png"
-                 alt="Solid T-Shirt Collection">
+
+        <div class="slide">
+            <img
+                src="images/banner-1.png"
+                alt="Solid T-Shirt">
         </div>
+
 
         <!-- BANNER 2 -->
-        <div class="banner">
-            <img src="1000586366.png"
-                 alt="Polo T-Shirt Collection">
+
+        <div class="slide">
+            <img
+                src="images/banner-2.png"
+                alt="Polo T-Shirt Collection">
         </div>
+
 
         <!-- BANNER 3 -->
-        <div class="banner">
-            <img src="1000586367.png"
-                 alt="Fashion T-Shirt Collection">
+
+        <div class="slide">
+            <img
+                src="images/banner-3.png"
+                alt="T-Shirt Fashion">
         </div>
+
 
         <!-- BANNER 4 -->
-        <div class="banner">
-            <img src="1000586371.png"
-                 alt="Customized T-Shirts">
+
+        <div class="slide">
+            <img
+                src="images/banner-4.png"
+                alt="Customized T-Shirts">
         </div>
 
+
         <!-- BANNER 5 -->
-        <div class="banner">
-            <img src="1000586372.png"
-                 alt="Stay Fresh T-Shirts">
+
+        <div class="slide">
+            <img
+                src="images/banner-5.png"
+                alt="Stay Fresh T-Shirts">
         </div>
+
+
+        <!-- BANNER 6 -->
+
+        <div class="slide logo-slide">
+            <img
+                src="images/banner-6.png"
+                alt="Relax Garments">
+        </div>
+
 
     </div>
 
 
-    <!-- LEFT -->
-    <button class="arrow left" onclick="previousBanner()">
+    <!-- PREVIOUS -->
+
+    <button
+        class="slider-btn prev"
+        onclick="previousSlide()">
         ❮
     </button>
 
-    <!-- RIGHT -->
-    <button class="arrow right" onclick="nextBanner()">
+
+    <!-- NEXT -->
+
+    <button
+        class="slider-btn next"
+        onclick="nextSlide()">
         ❯
     </button>
 
 
     <!-- DOTS -->
-    <div class="dots">
 
-        <span class="dot active" onclick="showBanner(0)"></span>
+    <div class="slider-dots">
 
-        <span class="dot" onclick="showBanner(1)"></span>
+        <span
+            class="dot active"
+            onclick="showSlide(0)">
+        </span>
 
-        <span class="dot" onclick="showBanner(2)"></span>
+        <span
+            class="dot"
+            onclick="showSlide(1)">
+        </span>
 
-        <span class="dot" onclick="showBanner(3)"></span>
+        <span
+            class="dot"
+            onclick="showSlide(2)">
+        </span>
 
-        <span class="dot" onclick="showBanner(4)"></span>
+        <span
+            class="dot"
+            onclick="showSlide(3)">
+        </span>
+
+        <span
+            class="dot"
+            onclick="showSlide(4)">
+        </span>
+
+        <span
+            class="dot"
+            onclick="showSlide(5)">
+        </span>
 
     </div>
 
 </section>
 
 
+
 <!-- =========================
      PRODUCTS
 ========================= -->
 
-<main class="container">
+<section class="section">
 
-    <div class="section-title">
-        <h2>Products</h2>
-        <p>Shop the latest T-shirt collection.</p>
+    <h1 class="section-title">
+        Products
+    </h1>
+
+    <p class="section-subtitle">
+        Shop the latest T-shirt collection.
+    </p>
+
+
+    <div class="products">
+
+
+        <div class="product-card">
+
+            <img
+                src="images/banner-1.png"
+                alt="JCK T-Shirt">
+
+            <div class="product-info">
+
+                <h3>JCK Premium T-Shirt</h3>
+
+                <div class="price">
+                    ₹799
+                </div>
+
+                <button class="add-btn">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product-card">
+
+            <img
+                src="images/banner-4.png"
+                alt="GETZED T-Shirt">
+
+            <div class="product-info">
+
+                <h3>GETZED T-Shirt</h3>
+
+                <div class="price">
+                    ₹1,019
+                </div>
+
+                <button class="add-btn">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product-card">
+
+            <img
+                src="images/banner-2.png"
+                alt="Collection T-Shirt">
+
+            <div class="product-info">
+
+                <h3>JCK Collection T-Shirt</h3>
+
+                <div class="price">
+                    ₹809
+                </div>
+
+                <button class="add-btn">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
     </div>
 
-    <div class="cards">
+</section>
 
-        <div class="card">
-            <h3>JACK / JCK</h3>
-            <p>Premium T-Shirt Collection</p>
+
+
+<!-- =========================
+     PRODUCT BRANDS
+========================= -->
+
+<section class="section">
+
+    <h1 class="section-title">
+        Product Brands
+    </h1>
+
+    <p class="section-subtitle">
+        Official Relax Garments product brands.
+    </p>
+
+
+    <div class="brands">
+
+
+        <!-- JCK -->
+
+        <div class="brand-card">
+
+            <div class="brand-logo">
+
+                <img
+                    src="images/jck-logo.png"
+                    alt="JACK JCK Logo">
+
+            </div>
+
+            <div class="brand-info">
+
+                <h2>
+                    JACK / JCK
+                </h2>
+
+                <p>
+                    Original JCK T-shirt collection.
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>GETZED</h3>
-            <p>Signature T-Shirt Collection</p>
+
+
+        <!-- GETZED -->
+
+        <div class="brand-card">
+
+            <div class="brand-logo">
+
+                <img
+                    src="images/getzed-logo.png"
+                    alt="GETZED Logo">
+
+            </div>
+
+            <div class="brand-info">
+
+                <h2>
+                    GETZED
+                </h2>
+
+                <p>
+                    Premium GETZED T-shirt collection.
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>Customized T-Shirts</h3>
-            <p>Bulk and customized orders available.</p>
-        </div>
 
     </div>
 
+</section>
 
-    <div class="section-title">
-        <h2>Product Brands</h2>
-        <p>Our official product brands.</p>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="section">
+
+    <h1 class="section-title">
+        Contact
+    </h1>
+
+    <p class="section-subtitle">
+        Customer support and bulk orders.
+    </p>
+
+
+    <div class="contact-grid">
+
+
+        <div class="contact-card">
+
+            <h3>
+                WhatsApp Orders
+            </h3>
+
+            <p>
+                Contact us for product orders.
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <h3>
+                Customer Support
+            </h3>
+
+            <p>
+                We help with orders and product queries.
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <h3>
+                India Delivery
+            </h3>
+
+            <p>
+                Delivery available across India.
+            </p>
+
+        </div>
+
+
     </div>
 
-    <div class="cards">
+</section>
 
-        <div class="card">
-            <h3>JACK / JCK</h3>
-            <p>Premium fashion collection.</p>
+
+
+<!-- =========================
+     HELP
+========================= -->
+
+<section class="section">
+
+    <h1 class="section-title">
+        Help & Details
+    </h1>
+
+    <p class="section-subtitle">
+        Everything you need before ordering.
+    </p>
+
+
+    <div class="contact-grid">
+
+
+        <div class="contact-card">
+            <h3>How to Order</h3>
+            <p>
+                Select a product and add it to cart.
+            </p>
         </div>
 
-        <div class="card">
-            <h3>GETZED</h3>
-            <p>Modern T-shirt collection.</p>
+
+        <div class="contact-card">
+            <h3>Price & Discount</h3>
+            <p>
+                Product price and available discounts.
+            </p>
         </div>
 
-        <div class="card">
-            <h3>Relax Garments</h3>
-            <p>India Online Store</p>
+
+        <div class="contact-card">
+            <h3>Bulk / Customized</h3>
+            <p>
+                Bulk and customized T-shirt orders.
+            </p>
         </div>
+
 
     </div>
 
+</section>
 
-    <div class="section-title">
-        <h2>Contact</h2>
-        <p>Customer support and bulk orders.</p>
+
+
+<!-- =========================
+     ADMIN FEATURES
+========================= -->
+
+<section class="section">
+
+    <h1 class="section-title">
+        Admin Features
+    </h1>
+
+    <p class="section-subtitle">
+        Products can be managed later through Admin Panel.
+    </p>
+
+
+    <div class="admin-grid">
+
+
+        <div class="admin-card">
+
+            <h3>
+                Add Product
+            </h3>
+
+            <p>
+                Add new T-shirts with images,
+                price, size and stock.
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Manage Product
+            </h3>
+
+            <p>
+                Edit or update products anytime.
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Manage Brands
+            </h3>
+
+            <p>
+                Manage JACK/JCK and GETZED.
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Manage Banners
+            </h3>
+
+            <p>
+                Add or delete homepage banners.
+            </p>
+
+        </div>
+
+
     </div>
 
-    <div class="cards">
+</section>
 
-        <div class="card">
-            <h3>WhatsApp Orders</h3>
-            <p>Contact us for product orders.</p>
-        </div>
-
-        <div class="card">
-            <h3>Customer Support</h3>
-            <p>We are here to help you.</p>
-        </div>
-
-        <div class="card">
-            <h3>India Delivery</h3>
-            <p>Online delivery across India.</p>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h2>Admin Features</h2>
-        <p>Products can be managed from the Admin Panel.</p>
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Add Product</h3>
-            <p>Add new T-shirts, images, prices and details.</p>
-        </div>
-
-        <div class="card">
-            <h3>Edit / Delete Product</h3>
-            <p>Update or remove products anytime.</p>
-        </div>
-
-        <div class="card">
-            <h3>Manage Banners</h3>
-            <p>Add, remove and change homepage banners.</p>
-        </div>
-
-    </div>
 
 </main>
+
 
 
 <!-- =========================
@@ -475,13 +969,28 @@ body{
 
 <footer class="footer">
 
-    <p>Relax Garments • JACK / JCK • GETZED</p>
+    <h2>
+        Relax Garments
+    </h2>
 
-    <p>India Only Online Store</p>
+    <p>
+        Premium Quality T-Shirts
+    </p>
 
-    <p>© 2026 Relax Garments. All Rights Reserved.</p>
+    <p>
+        JACK / JCK • GETZED
+    </p>
+
+    <p>
+        India Only Online Store
+    </p>
+
+    <p>
+        © 2026 Relax Garments
+    </p>
 
 </footer>
+
 
 
 <!-- =========================
@@ -490,29 +999,44 @@ body{
 
 <script>
 
-let currentBanner = 0;
+const track =
+    document.getElementById("sliderTrack");
 
-const totalBanners = 5;
+const dots =
+    document.querySelectorAll(".dot");
 
-const track = document.getElementById("bannerTrack");
+const hero =
+    document.getElementById("heroSlider");
 
-const dots = document.querySelectorAll(".dot");
+const totalSlides = 6;
+
+let currentSlide = 0;
+
+let autoSlide;
 
 
-function showBanner(index){
 
-    currentBanner = index;
+/* =========================
+   SHOW SLIDE
+========================= */
+
+function showSlide(index){
+
+    currentSlide =
+        (index + totalSlides) % totalSlides;
+
 
     track.style.transform =
         "translateX(-" +
-        (currentBanner * 20) +
+        (currentSlide * 100) +
         "%)";
 
-    dots.forEach((dot, i)=>{
+
+    dots.forEach(function(dot,index){
 
         dot.classList.toggle(
             "active",
-            i === currentBanner
+            index === currentSlide
         );
 
     });
@@ -520,86 +1044,135 @@ function showBanner(index){
 }
 
 
-/* NEXT */
 
-function nextBanner(){
+/* =========================
+   NEXT
+========================= */
 
-    currentBanner++;
+function nextSlide(){
 
-    if(currentBanner >= totalBanners){
-
-        currentBanner = 0;
-
-    }
-
-    showBanner(currentBanner);
+    showSlide(currentSlide + 1);
 
 }
 
 
-/* PREVIOUS */
 
-function previousBanner(){
+/* =========================
+   PREVIOUS
+========================= */
 
-    currentBanner--;
+function previousSlide(){
 
-    if(currentBanner < 0){
-
-        currentBanner = totalBanners - 1;
-
-    }
-
-    showBanner(currentBanner);
+    showSlide(currentSlide - 1);
 
 }
 
 
-/* AUTO SWIPE
-   Every 4 Seconds
-*/
 
-setInterval(function(){
+/* =========================
+   AUTO SWIPE
+========================= */
 
-    nextBanner();
+function startAutoSlide(){
 
-},4000);
+    autoSlide =
+        setInterval(function(){
+
+            nextSlide();
+
+        },4000);
+
+}
 
 
-/* TOUCH SWIPE */
+
+/* =========================
+   STOP AUTO
+========================= */
+
+function stopAutoSlide(){
+
+    clearInterval(autoSlide);
+
+}
+
+
+
+/* =========================
+   MOUSE HOVER
+========================= */
+
+hero.addEventListener(
+    "mouseenter",
+    stopAutoSlide
+);
+
+hero.addEventListener(
+    "mouseleave",
+    startAutoSlide
+);
+
+
+
+/* =========================
+   MOBILE TOUCH SWIPE
+========================= */
 
 let touchStartX = 0;
 
 let touchEndX = 0;
 
-const slider = document.querySelector(".banner-section");
+
+hero.addEventListener(
+    "touchstart",
+    function(event){
+
+        touchStartX =
+            event.touches[0].clientX;
+
+    },
+    {passive:true}
+);
 
 
-slider.addEventListener("touchstart",function(e){
+hero.addEventListener(
+    "touchend",
+    function(event){
 
-    touchStartX = e.changedTouches[0].screenX;
+        touchEndX =
+            event.changedTouches[0].clientX;
 
-});
+        let difference =
+            touchStartX - touchEndX;
 
 
-slider.addEventListener("touchend",function(e){
+        if(Math.abs(difference) > 50){
 
-    touchEndX = e.changedTouches[0].screenX;
+            if(difference > 0){
 
-    if(touchEndX < touchStartX - 50){
+                nextSlide();
 
-        nextBanner();
+            }else{
+
+                previousSlide();
+
+            }
+
+        }
 
     }
+);
 
-    if(touchEndX > touchStartX + 50){
 
-        previousBanner();
 
-    }
+/* START */
 
-});
+showSlide(0);
+
+startAutoSlide();
 
 </script>
+
 
 </body>
     </html>
