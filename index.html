@@ -1176,3 +1176,143 @@ startAutoSlide();
 
 </body>
     </html>
+<!-- ================= BANNER SLIDER ================= -->
+<section class="hero-slider">
+
+  <div class="slides">
+
+    <img src="./images/banner1.jpg" alt="Relax Garments Banner">
+    <img src="./images/banner2.jpg" alt="Relax Garments Banner">
+    <img src="./images/banner3.jpg" alt="Relax Garments Banner">
+    <img src="./images/banner4.jpg" alt="Relax Garments Banner">
+    <img src="./images/banner5.jpg" alt="Relax Garments Banner">
+    <img src="./images/banner6.jpg" alt="Relax Garments Banner">
+
+  </div>
+
+  <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+  <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+
+  <div class="dots">
+    <span onclick="goToSlide(0)"></span>
+    <span onclick="goToSlide(1)"></span>
+    <span onclick="goToSlide(2)"></span>
+    <span onclick="goToSlide(3)"></span>
+    <span onclick="goToSlide(4)"></span>
+    <span onclick="goToSlide(5)"></span>
+  </div>
+
+</section>
+
+<style>
+.hero-slider {
+  width: 100%;
+  max-width: 1200px;
+  margin: 25px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #111;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  min-width: 100%;
+  display: block;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,.75);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.prev {
+  left: 18px;
+}
+
+.next {
+  right: 18px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #aaa;
+  cursor: pointer;
+}
+
+.dots span.active {
+  background: white;
+  transform: scale(1.25);
+}
+</style>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelector(".slides");
+const dots = document.querySelectorAll(".dots span");
+
+function showSlide(index) {
+  currentSlide = (index + 6) % 6;
+  slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentSlide);
+  });
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlide + direction);
+}
+
+function goToSlide(index) {
+  showSlide(index);
+}
+
+/* AUTO SWIPE */
+setInterval(() => {
+  changeSlide(1);
+}, 4000);
+
+showSlide(0);
+</script>
+<div class="brand-logos">
+
+  <div class="brand-card">
+    <img src="./images/jck-logo.png" alt=">
+    <h3>JACK / JCK</h3>
+  </div>
+
+  <div class="brand-card">
+    <img src="./images/getzed-logo.png" alt="GETZED">
+    <h3>GETZED</h3>
+  </div>
+
+</div>
