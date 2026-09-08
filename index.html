@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relax Garments | JACK / JCK • GETZED</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#111827}
+.topbar{background:#07111f;color:#fff;text-align:center;padding:8px 10px;font-size:12px}
+header{background:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.nav{max-width:1200px;margin:auto;min-height:72px;padding:10px 16px;display:flex;align-items:center;gap:18px}
+.website-brand{display:flex;align-items:center;gap:9px;margin-right:auto;font-size:21px;font-weight:800}
+.website-brand img{width:46px;height:46px;object-fit:contain}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap}
+.toolbar a{padding:10px 14px;background:#eef1f5;border-radius:10px;font-size:14px;font-weight:700}
+main{max-width:1200px;margin:auto;padding:20px 16px 55px}
+.hero{position:relative;overflow:hidden;background:#111;border-radius:20px;box-shadow:0 10px 28px rgba(0,0,0,.12)}
+.hero-track{display:flex;transition:transform .6s ease}
+.hero-slide{min-width:100%}
+.hero-slide img{width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;display:block;background:#111}
+.hero-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(0,0,0,.75);color:white;font-size:28px;z-index:3}
+.prev{left:14px}.next{right:14px}
+.dots{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dots button{width:10px;height:10px;border:0;border-radius:50%;padding:0;background:#999}
+.dots button.active{background:#fff}
+section{margin-top:38px}
+h2{margin:0 0 5px;font-size:28px}
+.sub{margin:0 0 15px;color:#6b7280}
+.product-scroll{display:flex;gap:15px;overflow-x:auto;padding:3px 2px 15px;scroll-snap-type:x mandatory}
+.product{flex:0 0 260px;background:#fff;border:1px solid #e4e7eb;border-radius:16px;overflow:hidden;scroll-snap-align:start}
+.product>img{width:100%;height:275px;object-fit:cover;display:block;background:#e9edf2}
+.product-info{padding:14px}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#eef2ff;font-size:11px;font-weight:700}
+.product h3{font-size:17px;margin:9px 0 7px}
+.price{font-size:20px;font-weight:800;margin-bottom:12px}
+.add{width:100%;padding:11px;border:0;border-radius:10px;background:#07111f;color:#fff;font-weight:700}
+.brands{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.brand{background:#fff;border:1px solid #e4e7eb;border-radius:16px;padding:18px;display:flex;align-items:center;gap:16px}
+.brand img{width:115px;height:90px;object-fit:contain;background:#07111f;border-radius:12px;padding:7px}
+.brand h3{margin:0 0 7px}.brand p{margin:0;color:#6b7280;font-size:13px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.info{background:#fff;border:1px solid #e4e7eb;border-radius:16px;overflow:hidden}
+.info img{width:100%;height:155px;object-fit:cover;display:block;background:#e9edf2}
+.info div{padding:15px}.info h3{margin:0 0 7px}.info p,.help p{margin:0;color:#6b7280;font-size:13px;line-height:1.5}
+.help{background:#fff;border:1px solid #e4e7eb;border-radius:16px;padding:17px}
+.help h3{margin:0 0 7px}
+.cart{position:fixed;right:15px;bottom:15px;background:#07111f;color:#fff;padding:11px 15px;border-radius:12px;font-weight:700;z-index:120}
+footer{background:#07111f;color:#fff;text-align:center;padding:25px;font-size:12px}
+footer p{color:#cbd5e1;margin:6px 0}
+@media(max-width:800px){
+.nav{flex-direction:column;align-items:flex-start}
+.website-brand{margin:0}
+.brands,.grid3{grid-template-columns:1fr}
+.hero-slide img{aspect-ratio:16/8.5}
+}
+@media(max-width:520px){
+main{padding:14px 12px 50px}.product{flex-basis:235px}.product>img{height:245px}
+.toolbar a{padding:9px 11px;font-size:13px}.website-brand{font-size:19px}
+}
+</style>
+</head>
+<body>
 
+<div class="topbar">India Only • Relax Garments • JACK / JCK • GETZED</div>
+
+<header>
+<div class="nav">
+<a class="website-brand" href="#home">
+<img src="website-logo.png" alt="Relax Garments Website Logo">
+<span>Relax Garments</span>
+</a>
+<div class="toolbar">
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#brands">Brands</a>
+<a href="#contact">Contact</a>
+<a href="#help">Help</a>
+</div>
+</div>
+</header>
+
+<main id="home">
+
+<div class="hero">
+<div class="hero-track" id="heroTrack">
+<div class="hero-slide"><img src="banner-1.png" alt="Relax Garments Banner 1"></div>
+<div class="hero-slide"><img src="banner-2.png" alt="Relax Garments Banner 2"></div>
+<div class="hero-slide"><img src="banner-3.png" alt="Relax Garments Banner 3"></div>
+<div class="hero-slide"><img src="banner-4.png" alt="Relax Garments Banner 4"></div>
+<div class="hero-slide"><img src="banner-5.png" alt="Relax Garments Banner 5"></div>
+<div class="hero-slide"><img src="banner-6.png" alt="Relax Garments Banner 6"></div>
+</div>
+<button class="hero-btn prev" onclick="changeBanner(-1)">‹</button>
+<button class="hero-btn next" onclick="changeBanner(1)">›</button>
+<div class="dots" id="dots"></div>
+</div>
+
+<section id="products">
+<h2>Products</h2>
+<p class="sub">Shop the latest T-shirt collection.</p>
+<div class="product-scroll" id="productScroll"></div>
+</section>
+
+<section id="brands">
+<h2>Product Brands</h2>
+<p class="sub">Official T-shirt product brands.</p>
+<div class="brands">
+<div class="brand">
+<img src="jck-brand.png" alt="JACK JCK Product Logo">
+<div><h3>JACK / JCK</h3><p>Original T-shirt product brand.</p></div>
+</div>
+<div class="brand">
+<img src="getzed-brand.png" alt="GETZED Product Logo">
+<div><h3>GETZED</h3><p>Original T-shirt product brand.</p></div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p class="sub">Customer support and bulk orders.</p>
+<div class="grid3">
+<div class="info"><img src="banner-1.png" alt="WhatsApp Orders"><div><h3>WhatsApp Orders</h3><p>Contact us for product and bulk-order enquiries.</p></div></div>
+<div class="info"><img src="banner-4.png" alt="Customer Support"><div><h3>Customer Support</h3><p>We help with orders, customization and availability.</p></div></div>
+<div class="info"><img src="banner-5.png" alt="India Delivery"><div><h3>India Delivery</h3><p>Online store focused on customers across India.</p></div></div>
+</div>
+</section>
+
+<section id="help">
+<h2>Help & Details</h2>
+<p class="sub">Everything you need before ordering.</p>
+<div class="grid3">
+<div class="help"><h3>How to Order</h3><p>Select a product, add it to cart and continue with your order.</p></div>
+<div class="help"><h3>Price & Discount</h3><p>Prices and discounts will be managed from the future admin panel.</p></div>
+<div class="help"><h3>Bulk / Customized</h3><p>JACK / JCK and GETZED products can support bulk and customized orders.</p></div>
+</div>
+</section>
+
+</main>
+
+<div class="cart">Cart: <span id="cartCount">0</span></div>
+
+<footer>
+<b>Relax Garments • JACK / JCK • GETZED</b>
+<p>India Only Online Store</p>
+</footer>
+
+<script>
+/* FUTURE ADMIN:
+   The products array is intentionally separated so a real admin/database
+   can replace it later. New admin products will appear automatically.
+*/
+const products=[
+{id:1,name:"JCK Premium T-Shirt",brand:"JACK / JCK",price:799,image:"product-1.png"},
+{id:2,name:"GETZED Signature T-Shirt",brand:"GETZED",price:1019,image:"product-2.png"},
+{id:3,name:"JCK Collection T-Shirt",brand:"JACK / JCK",price:809,image:"product-3.png"},
+{id:4,name:"GETZED Classic T-Shirt",brand:"GETZED",price:899,image:"product-4.png"},
+{id:5,name:"JCK Premium Collection",brand:"JACK / JCK",price:949,image:"product-5.png"}
+];
+
+const productScroll=document.getElementById("productScroll");
+function renderProducts(){
+productScroll.innerHTML=products.map(p=>`
+<article class="product">
+<img src="${p.image}" alt="${p.name}">
+<div class="product-info">
+<span class="badge">${p.brand}</span>
+<h3>${p.name}</h3>
+<div class="price">₹${p.price.toLocaleString("en-IN")}</div>
+<button class="add" onclick="addToCart(${p.id})">Add to Cart</button>
+</div>
+</article>`).join("");
+}
+renderProducts();
+
+let cart=JSON.parse(localStorage.getItem("relaxGarmentsCart")||"[]");
+document.getElementById("cartCount").textContent=cart.length;
+function addToCart(id){
+const p=products.find(x=>x.id===id);
+if(!p)return;
+cart.push(p);
+localStorage.setItem("relaxGarmentsCart",JSON.stringify(cart));
+document.getElementById("cartCount").textContent=cart.length;
+}
+
+let bannerIndex=0;
+const heroTrack=document.getElementById("heroTrack");
+const dots=document.getElementById("dots");
+for(let i=0;i<6;i++){
+const d=document.createElement("button");
+d.onclick=()=>showBanner(i);
+dots.appendChild(d);
+}
+function showBanner(i){
+bannerIndex=(i+6)%6;
+heroTrack.style.transform="translateX(-"+(bannerIndex*100)+"%)";
+[...dots.children].forEach((d,n)=>d.classList.toggle("active",n===bannerIndex));
+}
+function changeBanner(step){showBanner(bannerIndex+step)}
+showBanner(0);
+setInterval(()=>changeBanner(1),4000);
+</script>
+</body>
+</html>
