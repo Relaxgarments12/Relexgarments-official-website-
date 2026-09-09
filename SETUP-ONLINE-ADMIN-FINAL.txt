@@ -1,0 +1,12 @@
+RELAX GARMENTS — ONLINE ADMIN FINAL
+
+1. GitHub root me is ZIP ke SAARE files upload/replace karein. ZIP ko direct upload na karein; extract karke files root me rakhein.
+2. supabase-config.js me SUPABASE_ANON_KEY ko apni Supabase PUBLISHABLE key se replace karein. Secret/service_role key kabhi na use karein.
+3. Aapke existing products SQL ko already run kiya ja chuka hai. Contact/Help live editing ke liye supabase-contact-help-upgrade.sql ko SQL Editor me run karein. Isme YOUR_ADMIN_EMAIL_HERE ko same Admin email se replace karein.
+4. GitHub Pages ko update hone ke liye 1-3 minute dein.
+5. Live Admin Panel: https://YOUR-GITHUB-PAGES-DOMAIN/admin.html
+6. Admin login ke liye wahi Supabase Auth email/password use karein.
+7. Add Product: image upload + brand + sale price + old price + description.
+8. Edit/Delete: Live Products table se.
+9. New Arrivals: created_at ke basis par 60 days. Product 60 days ke baad Products me rahega.
+10. Contact & Help: Admin Panel me edit karke live pages par dikh sakta hai.
