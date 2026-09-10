@@ -1,2 +1,2 @@
-const SUPABASE_URL = "https://dqzvheupzchiwzsasthk.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_sb_secret_bTKHqmhBgRbzUnTS2gP31A_ol92JCUs
+window.SUPABASE_URL = "https://dqzvheupzchiwzsasthk.supabase.co";
+window.SUPABASE_ANON_KEY = "sb_publishable_sb_secret_DU3bZ1x9M-z8NzpJWGG_OA_sVoB55Mj
