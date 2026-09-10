@@ -13,4 +13,6 @@ async function loadSettings(){let r=await sb.from('site_settings').select('*').e
 $('saveSettings').addEventListener('click',async()=>{let d={id:1,whatsapp:$('whatsapp').value,whatsapp_text:$('whatsapp_text').value,support:$('support').value,support_text:$('support_text').value,delivery:$('delivery').value,delivery_text:$('delivery_text').value,order_help:$('order_help').value,price_help:$('price_help').value,bulk_help:$('bulk_help').value,updated_at:new Date().toISOString()};let r=await sb.from('site_settings').upsert(d);alert(r.error?r.error.message:'Contact & Help saved successfully.')})
 $('loginBtn').onclick=login;$('clearBtn').onclick=clearForm;$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
 (async()=>{if(!window.sb){setStatus('Supabase not connected — check supabase-config.js');return}let s=await sb.auth.getSession();if(s.data.session)showPanel();else setStatus('Supabase connected. Please log in.');})();
-</script></body></html>
+</script></body></html><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</body></html>
