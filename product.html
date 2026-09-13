@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product | Relax Garments</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.detail{padding:35px 0 60px}.back{display:inline-block;margin-bottom:20px;color:#111;text-decoration:none;font-size:12px;font-weight:800}
+.productDetail{display:grid;grid-template-columns:1.05fr .95fr;gap:35px;align-items:start}
+.gallery{position:sticky;top:15px}.mainImg{width:100%;height:560px;object-fit:cover;background:#f3f3f3;border-radius:12px;display:block}
+.thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+.thumb{height:90px;object-fit:cover;width:100%;background:#f3f3f3;border:2px solid transparent;border-radius:6px;cursor:pointer}
+.thumb.active{border-color:#111}.info{padding:10px 0}.brand{font-size:10px;letter-spacing:3px;color:#777;font-weight:800}.name{font-size:32px;margin:8px 0 15px}.price{font-size:25px;font-weight:900}.old{text-decoration:line-through;color:#999;font-size:14px;margin-left:8px}.off{font-size:12px;font-weight:800;margin-left:8px}.desc{color:#666;line-height:1.7;margin:20px 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{padding:14px;border-radius:5px;border:1px solid #111;font-size:11px;font-weight:900;letter-spacing:1px;cursor:pointer}.cart{background:#111;color:#fff}.buy{background:#fff;color:#111}.loading{text-align:center;padding:70px;color:#777}
+@media(max-width:750px){.productDetail{grid-template-columns:1fr;gap:18px}.gallery{position:static}.mainImg{height:430px}.thumbs{grid-template-columns:repeat(3,1fr)}.thumb{height:95px}.name{font-size:26px}}
+</style>
+</head>
+<body>
+<header class="header"><div class="container nav">
+<a href="index.html"><img class="logo" src="website-logo.png" alt="Relax Garments"></a>
+<nav class="menu"><a href="index.html">HOME</a><a href="brands.html">BRANDS</a><a href="products.html">PRODUCTS</a><a href="contact.html">CONTACT</a><a href="help.html">HELP</a></nav>
+</div></header>
+
+<main class="detail"><div class="container">
+<a class="back" href="products.html">← BACK TO PRODUCTS</a>
+<div id="root" class="loading">Loading product...</div>
+</div></main>
+
+<footer class="footer"><div class="container footer-inner"><div><b>RELAX GARMENTS</b><br><small>JACK &amp; GETZED — Premium Fashion</small></div><small>© 2026 Relax Garments</small></div></footer>
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const sb=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);
+const cols=['image_url','image2_url','image3_url','image4_url','image5_url','image6_url'];
+const id=new URLSearchParams(location.search).get('id');
+let product=null, imgs=[], current=0;
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function val(p,keys){for(const k of keys){if(p[k]!=null&&String(p[k]).trim()!=='')return p[k]}return ''}
+function cart(){try{return JSON.parse(localStorage.getItem('relax_cart')||'[]')}catch(e){return[]}}
+function toast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+function addCart(){
+ let c=cart(),key=String(product.id??product.name??product.product_name);
+ let f=c.find(x=>String(x.id??x.name)===key);
+ if(f)f.qty=(Number(f.qty)||1)+1;else c.push({id:product.id,name:val(product,['name','product_name','item_name','item','title'])||'Premium T-Shirt',brand:val(product,['brand','brand_name']),price:val(product,['price','sale_price','selling_price']),qty:1});
+ localStorage.setItem('relax_cart',JSON.stringify(c));toast('Added to cart');
+}
+function buyNow(){addCart();location.href='contact.html'}
+function show(i){
+ current=i;document.getElementById('mainImg').src=imgs[i];
+ document.querySelectorAll('.thumb').forEach((x,j)=>x.classList.toggle('active',j===i));
+}
+function render(){
+ const name=val(product,['name','product_name','item_name','item','title'])||'Premium T-Shirt';
+ const brand=val(product,['brand','brand_name']);
+ const price=val(product,['price','sale_price','selling_price','offer_price']);
+ const old=val(product,['old_price','mrp','original_price','regular_price']);
+ const dc=val(product,['discount','discount_percent','discount_percentage']);
+ const first=imgs[0]||'';
+ document.getElementById('root').className='productDetail';
+ document.getElementById('root').innerHTML=`
+ <div class="gallery">
+   <img id="mainImg" class="mainImg" src="${esc(first)}" alt="${esc(name)}">
+   <div class="thumbs">${imgs.map((x,i)=>`<img class="thumb ${i===0?'active':''}" src="${esc(x)}" onclick="show(${i})" alt="Product image ${i+1}">`).join('')}</div>
+ </div>
+ <div class="info">
+   ${brand?`<div class="brand">${esc(brand)}</div>`:''}
+   <h1 class="name">${esc(name)}</h1>
+   <div><span class="price">${price?'₹'+esc(price):''}</span>${old?`<span class="old">₹${esc(old)}</span>`:''}${dc?`<span class="off">${esc(dc)}% OFF</span>`:''}</div>
+   <p class="desc">Premium T-shirt from Relax Garments. View all available product images before placing your order.</p>
+   <div class="actions"><button class="btn cart" onclick="addCart()">ADD TO CART</button><button class="btn buy" onclick="buyNow()">BUY NOW</button></div>
+ </div>`;
+}
+async function load(){
+ if(!id){document.getElementById('root').innerHTML='Product not found.';return}
+ const {data,error}=await sb.from('products').select('*').eq('id',id).single();
+ if(error||!data){console.error(error);document.getElementById('root').innerHTML='Product not found.';return}
+ product=data;imgs=cols.map(c=>data[c]).filter(x=>x&&String(x).trim());render();
+}
+load();
+</script>
+</body>
+</html>
