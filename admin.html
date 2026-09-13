@@ -1,749 +1,318 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Relax Garments - Admin Panel</title>
-
-<!-- SUPABASE: MUST LOAD BEFORE ADMIN CODE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-
+<title>Relax Garments — Admin</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f6f8;
-  color:#222;
-}
-header{
-  background:#111;
-  color:#fff;
-  padding:18px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-header h1{margin:0;font-size:22px}
-.container{max-width:1100px;margin:auto;padding:20px}
-.card{
-  background:#fff;
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08);
-}
-h2{margin-top:0}
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:7px 0 12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
-}
-button{
-  border:0;
-  border-radius:8px;
-  padding:11px 17px;
-  cursor:pointer;
-  font-weight:bold;
-  margin:4px;
-}
-.primary{background:#111;color:#fff}
-.danger{background:#c62828;color:#fff}
-.secondary{background:#e9ecef;color:#111}
-.success{background:#198754;color:#fff}
+body{margin:0;background:#f3f4f6;color:#222;font-family:Arial,Helvetica,sans-serif}
+header{background:#111;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+header b{font-size:16px}
+button{border:0;border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer}
+.btn-black{background:#111;color:#fff}.btn-red{background:#d93025;color:#fff}.btn-green{background:#159447;color:#fff}.btn-gray{background:#e7eaee;color:#222}
+.container{max-width:900px;margin:18px auto;padding:0 12px}
+.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 2px 12px #00000010}
+h2{margin:0 0 16px;font-size:20px}
+label{display:block;font-size:13px;font-weight:700;margin:11px 0 5px}
+input,select,textarea{width:100%;border:1px solid #cfd3d8;border-radius:7px;padding:11px;font-size:14px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.status{padding:11px 12px;border-radius:8px;margin-bottom:15px;font-size:14px}
+.ok{background:#dff5e8;color:#126b39}.err{background:#fde6e4;color:#a51d15}.info{background:#e8f0fe;color:#174ea6}
 .hidden{display:none!important}
-.status{
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:15px;
-  background:#fff3cd;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:15px;
-}
-.product{
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px;
-  background:#fff;
-}
-.product img{
-  width:100%;
-  height:240px;
-  object-fit:contain;
-  background:#f5f5f5;
-  border-radius:8px;
-}
-.price{font-size:20px;font-weight:bold}
-.old{
-  text-decoration:line-through;
-  color:#888;
-  margin-left:8px;
-}
-.small{font-size:13px;color:#666}
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.file-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.file-box{border:1px dashed #b8bdc4;border-radius:8px;padding:9px;background:#fafafa}
+.file-box span{display:block;font-size:12px;margin-bottom:5px;font-weight:700}
+.file-box input{padding:7px;font-size:12px}
+.product{border:1px solid #e0e3e7;border-radius:10px;padding:10px;margin-top:10px;display:grid;grid-template-columns:90px 1fr;gap:12px}
+.thumb{width:90px;height:105px;border-radius:7px;overflow:hidden;background:#f1f2f4;display:flex;align-items:center;justify-content:center}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.meta h3{margin:0 0 4px;font-size:16px}.brand{font-size:12px;color:#666;font-weight:700}.price{font-weight:700;margin-top:5px}.old{text-decoration:line-through;color:#888;margin-left:7px;font-size:12px}
+.small{font-size:12px;color:#666}
 @media(max-width:600px){
-  .row{grid-template-columns:1fr}
-  header{padding:14px}
-  header h1{font-size:18px}
-}
-#loginBox{
-  max-width:430px;
-  margin:60px auto;
+ .grid2{grid-template-columns:1fr}
+ .file-grid{grid-template-columns:1fr 1fr}
+ .product{grid-template-columns:72px 1fr}.thumb{width:72px;height:84px}
 }
 </style>
 </head>
-
 <body>
-
 <header>
-  <h1>RELAX GARMENTS — ADMIN</h1>
-  <button id="logoutBtn" class="danger hidden">Logout</button>
+<b>RELAX GARMENTS — ADMIN</b>
+<button id="logoutBtn" class="btn-red hidden" onclick="logout()">Logout</button>
 </header>
 
 <div class="container">
+<div id="status" class="status info">Checking Supabase connection…</div>
 
-  <!-- CONNECTION STATUS -->
-  <div id="connectionStatus" class="status">
-    Checking Supabase connection…
-  </div>
+<section id="loginCard" class="card hidden">
+<h2>Admin Login</h2>
+<label>Email</label><input id="email" type="email" autocomplete="username">
+<label>Password</label><input id="password" type="password" autocomplete="current-password">
+<div class="actions"><button class="btn-black" onclick="login()">Login</button></div>
+</section>
 
-  <!-- LOGIN -->
-  <section id="loginBox" class="card hidden">
-    <h2>Admin Login</h2>
+<div id="adminArea" class="hidden">
 
-    <label>Email</label>
-    <input id="email" type="email" placeholder="Admin email">
+<section class="card">
+<h2 id="formTitle">Add New Product</h2>
+<input id="editId" type="hidden">
 
-    <label>Password</label>
-    <input id="password" type="password" placeholder="Password">
-
-    <button class="primary" onclick="login()">Login</button>
-
-    <p id="loginMsg" class="small"></p>
-  </section>
-
-  <!-- ADMIN AREA -->
-  <main id="adminArea" class="hidden">
-
-    <!-- PRODUCT FORM -->
-    <section class="card">
-      <h2 id="formTitle">Add New Product</h2>
-
-      <input type="hidden" id="productId">
-
-      <div class="row">
-        <div>
-          <label>Product Name</label>
-          <input id="name" placeholder="Example: Premium Cotton T-Shirt">
-        </div>
-
-        <div>
-          <label>Brand</label>
-          <select id="brand">
-            <option value="JACK">JACK</option>
-            <option value="GETZED">GETZED</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Sale Price</label>
-          <input id="price" type="number" placeholder="999">
-        </div>
-
-        <div>
-          <label>Old Price</label>
-          <input id="oldPrice" type="number" placeholder="1499">
-        </div>
-      </div>
-
-      <label>Product Image</label>
-      <input id="imageFile" type="file" accept="image/*">
-
-      <label>Image URL (optional)</label>
-      <input id="imageUrl" placeholder="https://...">
-
-      <label>Description</label>
-      <textarea id="description" rows="4" placeholder="Product description"></textarea>
-
-      <button class="primary" onclick="saveProduct()">Save Product</button>
-      <button class="secondary" onclick="resetForm()">Clear</button>
-
-      <p id="productMsg" class="small"></p>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section class="card">
-      <h2>All Products</h2>
-      <button class="secondary" onclick="loadProducts()">Refresh Products</button>
-      <div id="productsGrid" class="grid"></div>
-    </section>
-
-    <!-- CONTACT / HELP -->
-    <section class="card">
-      <h2>Contact & Help Settings</h2>
-
-      <label>WhatsApp Number</label>
-      <input id="whatsapp" placeholder="91XXXXXXXXXX">
-
-      <label>WhatsApp Text</label>
-      <input id="whatsappText" placeholder="Contact us for orders.">
-
-      <label>Support</label>
-      <input id="support" placeholder="Support contact">
-
-      <label>Support Text</label>
-      <input id="supportText" placeholder="For product and order help.">
-
-      <label>Delivery</label>
-      <input id="delivery" value="India">
-
-      <label>Delivery Text</label>
-      <input id="deliveryText" placeholder="Delivery available across India.">
-
-      <label>Order Help</label>
-      <textarea id="orderHelp" rows="3"></textarea>
-
-      <label>Price Help</label>
-      <textarea id="priceHelp" rows="3"></textarea>
-
-      <label>Bulk Help</label>
-      <textarea id="bulkHelp" rows="3"></textarea>
-
-      <button class="success" onclick="saveSettings()">Save Contact & Help</button>
-
-      <p id="settingsMsg" class="small"></p>
-    </section>
-
-  </main>
+<div class="grid2">
+<div><label>Product Name</label><input id="name" placeholder="Example: Premium Cotton T-Shirt"></div>
+<div><label>Brand</label><select id="brand"><option>JACK</option><option>GETZED</option></select></div>
+<div><label>Sale Price</label><input id="price" type="number" min="0" placeholder="799"></div>
+<div><label>Old Price</label><input id="oldPrice" type="number" min="0" placeholder="1499"></div>
 </div>
 
+<label>Product Images — select up to 6 images together</label>
+<input id="images" type="file" accept="image/*" multiple>
+<div class="small">Image 1 is the main product image. Images 2–6 are additional gallery images.</div>
+
+<label>Image URL (optional)</label><input id="imageUrl" placeholder="https://...">
+
+<label>Description</label>
+<textarea id="description" placeholder="Premium quality T-shirt"></textarea>
+
+<div class="actions">
+<button class="btn-black" onclick="saveProduct()">Save Product</button>
+<button class="btn-gray" onclick="clearForm()">Clear</button>
+</div>
+</section>
+
+<section class="card">
+<h2>All Products</h2>
+<div class="actions"><button class="btn-gray" onclick="loadProducts()">Refresh Products</button></div>
+<div id="productsList"><div class="small">Loading…</div></div>
+</section>
+
+<section class="card">
+<h2>Contact &amp; Help Settings</h2>
+<label>WhatsApp Number</label><input id="whatsapp">
+<label>WhatsApp Text</label><input id="whatsappText">
+<label>Support</label><input id="support">
+<label>Support Text</label><input id="supportText">
+<label>Delivery</label><input id="delivery">
+<label>Delivery Text</label><input id="deliveryText">
+<label>Order Help</label><textarea id="orderHelp"></textarea>
+<label>Price Help</label><textarea id="priceHelp"></textarea>
+<label>Bulk Help</label><textarea id="bulkHelp"></textarea>
+<div class="actions"><button class="btn-green" onclick="saveSettings()">Save Contact &amp; Help</button></div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script>
-/* =========================================================
-   RELAX GARMENTS ADMIN
-   Supabase library + config are loaded ABOVE this script.
-   ========================================================= */
+let sb=null;
+let editing=false;
 
-let sb = null;
-let products = [];
-
-const $ = id => document.getElementById(id);
-
-function money(n){
-  return "₹" + Number(n || 0).toLocaleString("en-IN");
+function setStatus(msg,type="info"){
+  const el=document.getElementById("status");
+  el.textContent=msg;
+  el.className="status "+type;
+}
+function configured(){
+  return window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
+    !String(window.SUPABASE_URL).includes("PASTE_") &&
+    !String(window.SUPABASE_ANON_KEY).includes("PASTE_");
+}
+if(configured()){
+  try{ sb=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY); }
+  catch(e){ setStatus("Supabase client error: "+e.message,"err"); }
+}else{
+  setStatus("Supabase not configured — check supabase-config.js","err");
 }
 
-function discount(p){
-  if(p.old_price && Number(p.old_price) > Number(p.price)){
-    return Math.round(
-      (1 - Number(p.price)/Number(p.old_price))*100
-    );
-  }
-  return 0;
-}
-
-/* ---------- SUPABASE INITIALIZATION ---------- */
-
-async function initSupabase(){
-
-  try{
-
-    if(!window.supabase){
-      throw new Error("Supabase library did not load.");
-    }
-
-    if(!window.SUPABASE_URL){
-      throw new Error("SUPABASE_URL missing.");
-    }
-
-    if(!window.SUPABASE_ANON_KEY){
-      throw new Error("SUPABASE_ANON_KEY missing.");
-    }
-
-    if(
-      window.SUPABASE_URL.includes("PASTE_") ||
-      window.SUPABASE_ANON_KEY.includes("PASTE_")
-    ){
-      throw new Error("Supabase config still contains placeholder.");
-    }
-
-    sb = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
-
-    /* Real connection test */
-    const {error} = await sb
-      .from("products")
-      .select("id")
-      .limit(1);
-
-    /*
-      PGRST116 / empty result is NOT a connection failure.
-      Permission errors are displayed clearly.
-    */
-
-    if(error){
-      $("connectionStatus").style.background="#f8d7da";
-      $("connectionStatus").textContent =
-        "Supabase connected, but database access has an error: " +
-        error.message;
-      $("loginBox").classList.remove("hidden");
-      return;
-    }
-
-    $("connectionStatus").style.background="#d1e7dd";
-    $("connectionStatus").textContent =
-      "✓ Supabase connected successfully.";
-
-    checkSession();
-
-  }catch(err){
-
-    console.error(err);
-
-    $("connectionStatus").style.background="#f8d7da";
-    $("connectionStatus").textContent =
-      "Supabase connection failed: " + err.message;
-
-    $("loginBox").classList.remove("hidden");
-  }
-}
-
-/* ---------- AUTH ---------- */
-
-async function checkSession(){
-
-  const {data,error} = await sb.auth.getSession();
-
-  if(error){
-    $("loginBox").classList.remove("hidden");
-    return;
-  }
-
+async function start(){
+  if(!sb){document.getElementById("loginCard").classList.remove("hidden");return;}
+  const {data,error}=await sb.auth.getSession();
+  if(error){setStatus(error.message,"err");document.getElementById("loginCard").classList.remove("hidden");return;}
   if(data.session){
     showAdmin();
+    await loadProducts();
+    await loadSettings();
   }else{
-    $("loginBox").classList.remove("hidden");
+    setStatus("Please login to continue.","info");
+    document.getElementById("loginCard").classList.remove("hidden");
   }
 }
-
-async function login(){
-
-  const email = $("email").value.trim();
-  const password = $("password").value;
-
-  if(!email || !password){
-    $("loginMsg").textContent="Please enter email and password.";
-    return;
-  }
-
-  $("loginMsg").textContent="Logging in…";
-
-  const {data,error} = await sb.auth.signInWithPassword({
-    email:email,
-    password:password
-  });
-
-  if(error){
-    $("loginMsg").textContent="Login failed: "+error.message;
-    return;
-  }
-
-  $("loginMsg").textContent="Login successful.";
-
-  showAdmin();
-}
-
-async function logout(){
-
-  await sb.auth.signOut();
-
-  $("adminArea").classList.add("hidden");
-  $("logoutBtn").classList.add("hidden");
-  $("loginBox").classList.remove("hidden");
-}
-
-$("logoutBtn").addEventListener("click",logout);
-
 function showAdmin(){
-
-  $("loginBox").classList.add("hidden");
-  $("adminArea").classList.remove("hidden");
-  $("logoutBtn").classList.remove("hidden");
-
-  loadProducts();
-  loadSettings();
+  document.getElementById("loginCard").classList.add("hidden");
+  document.getElementById("adminArea").classList.remove("hidden");
+  document.getElementById("logoutBtn").classList.remove("hidden");
+  setStatus("✓ Supabase connected successfully.","ok");
 }
-
-/* ---------- PRODUCTS ---------- */
+async function login(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  if(!email||!password){setStatus("Enter email and password.","err");return;}
+  const {error}=await sb.auth.signInWithPassword({email,password});
+  if(error){setStatus("Login failed: "+error.message,"err");return;}
+  showAdmin(); await loadProducts(); await loadSettings();
+}
+async function logout(){
+  await sb.auth.signOut();
+  location.reload();
+}
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function money(n){return "₹"+Number(n||0).toLocaleString("en-IN")}
+function discount(p){return p.old_price && Number(p.old_price)>Number(p.price)?Math.round((1-Number(p.price)/Number(p.old_price))*100):0}
 
 async function loadProducts(){
-
-  if(!sb)return;
-
-  const grid=$("productsGrid");
-
-  grid.innerHTML="<p>Loading products…</p>";
-
-  const {data,error}=await sb
-    .from("products")
-    .select("*")
-    .order("created_at",{ascending:false});
-
-  if(error){
-    grid.innerHTML=
-      "<p>Could not load products: "+
-      escapeHtml(error.message)+
-      "</p>";
-    return;
-  }
-
-  products=data || [];
-
-  if(!products.length){
-    grid.innerHTML="<p>No products found.</p>";
-    return;
-  }
-
-  grid.innerHTML=products.map(productHTML).join("");
-}
-
-function productHTML(p){
-
-  const d=discount(p);
-
-  return `
-    <article class="product">
-
-      <img
-        src="${escapeAttr(p.image_url || "")}"
-        alt="${escapeAttr(p.name || "")}"
-      >
-
-      <p class="small">${escapeHtml(p.brand || "")}</p>
-
-      <h3>${escapeHtml(p.name || "")}</h3>
-
-      <div>
-        <span class="price">${money(p.price)}</span>
-
-        ${
-          p.old_price
-          ? `<span class="old">${money(p.old_price)}</span>`
-          : ""
-        }
-
-        ${
-          d
-          ? `<span class="small"> ${d}% OFF</span>`
-          : ""
-        }
+  const box=document.getElementById("productsList");
+  box.innerHTML="<div class='small'>Loading…</div>";
+  const {data,error}=await sb.from("products").select("*").order("created_at",{ascending:false});
+  if(error){box.innerHTML="<div class='status err'>"+esc(error.message)+"</div>";return;}
+  if(!data||!data.length){box.innerHTML="<div class='small'>No products found.</div>";return;}
+  box.innerHTML=data.map(p=>{
+    const off=discount(p);
+    return `<div class="product">
+      <div class="thumb"><img src="${esc(p.image_url||"")}" alt=""></div>
+      <div class="meta">
+        <div class="brand">${esc(p.brand)}</div>
+        <h3>${esc(p.name)}</h3>
+        <div class="price">${money(p.price)} <span class="old">${p.old_price?money(p.old_price):""}</span> ${off?`<span class="small">${off}% OFF</span>`:""}</div>
+        <div class="small">${p.image2_url||p.image3_url||p.image4_url||p.image5_url||p.image6_url?"6-image gallery data available":"Main image only"}</div>
+        <div class="actions">
+          <button class="btn-black" onclick='editProduct(${JSON.stringify(p.id)})'>Edit</button>
+          <button class="btn-red" onclick='deleteProduct(${JSON.stringify(p.id)})'>Delete</button>
+        </div>
       </div>
-
-      <p class="small">
-        ${
-          p.created_at
-          ? "Added: "+new Date(p.created_at).toLocaleDateString("en-IN")
-          : ""
-        }
-      </p>
-
-      <button
-        class="primary"
-        onclick="editProduct('${p.id}')">
-        Edit
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteProduct('${p.id}')">
-        Delete
-      </button>
-
-    </article>
-  `;
+    </div>`;
+  }).join("");
 }
 
-/* ---------- SAVE PRODUCT ---------- */
+async function uploadFile(file,index){
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+  const path=Date.now()+"-"+Math.random().toString(36).slice(2,9)+"-"+index+"-"+safe;
+  const {error}=await sb.storage.from("product-images").upload(path,file,{upsert:false,contentType:file.type});
+  if(error) throw error;
+  const {data}=sb.storage.from("product-images").getPublicUrl(path);
+  return data.publicUrl;
+}
 
 async function saveProduct(){
+  const id=document.getElementById("editId").value;
+  const name=document.getElementById("name").value.trim();
+  const brand=document.getElementById("brand").value;
+  const price=Number(document.getElementById("price").value);
+  const oldPrice=document.getElementById("oldPrice").value===""?null:Number(document.getElementById("oldPrice").value);
+  const desc=document.getElementById("description").value.trim();
+  const imageUrl=document.getElementById("imageUrl").value.trim();
+  const files=[...document.getElementById("images").files].slice(0,6);
+  if(!name){setStatus("Product Name is required.","err");return;}
+  if(!Number.isFinite(price)){setStatus("Enter a valid Sale Price.","err");return;}
 
-  if(!sb){
-    $("productMsg").textContent="Supabase is not connected.";
-    return;
-  }
-
-  const id=$("productId").value;
-  const name=$("name").value.trim();
-  const brand=$("brand").value;
-  const price=Number($("price").value);
-  const oldPrice=
-    $("oldPrice").value
-    ? Number($("oldPrice").value)
-    : null;
-  const description=$("description").value.trim();
-  const imageUrl=$("imageUrl").value.trim();
-  const file=$("imageFile").files[0];
-
-  if(!name){
-    $("productMsg").textContent="Product name is required.";
-    return;
-  }
-
-  if(!price){
-    $("productMsg").textContent="Sale price is required.";
-    return;
-  }
-
-  $("productMsg").textContent="Saving…";
-
-  let finalImage=imageUrl;
-
-  /* Upload image to Supabase Storage */
-  if(file){
-
-    try{
-
-      const safeName=
-        file.name
-        .replace(/[^a-zA-Z0-9._-]/g,"-");
-
-      const path=
-        Date.now()+"-"+safeName;
-
-      const {error:uploadError}=await sb
-        .storage
-        .from("product-images")
-        .upload(path,file,{
-          upsert:false
-        });
-
-      if(uploadError){
-        $("productMsg").textContent=
-          "Image upload failed: "+uploadError.message;
-        return;
+  try{
+    setStatus("Saving product…","info");
+    let row={name,brand,price,old_price:oldPrice,description:desc};
+    if(files.length){
+      for(let i=0;i<files.length;i++){
+        setStatus(`Uploading image ${i+1} of ${files.length}…`,"info");
+        const url=await uploadFile(files[i],i+1);
+        row[i===0?"image_url":"image"+(i+1)+"_url"]=url;
       }
-
-      const {data:urlData}=sb
-        .storage
-        .from("product-images")
-        .getPublicUrl(path);
-
-      finalImage=urlData.publicUrl;
-
-    }catch(err){
-
-      $("productMsg").textContent=
-        "Image upload error: "+err.message;
-      return;
+    }else if(imageUrl){
+      row.image_url=imageUrl;
     }
+
+    if(!id && !row.image_url){setStatus("Please select at least one image or enter an Image URL.","err");return;}
+
+    if(id){
+      const {data:old,error:oldErr}=await sb.from("products").select("*").eq("id",id).single();
+      if(oldErr) throw oldErr;
+      row.updated_at=new Date().toISOString();
+      if(!row.image_url) row.image_url=old.image_url;
+      for(let i=2;i<=6;i++) if(!row["image"+i+"_url"]) row["image"+i+"_url"]=old["image"+i+"_url"]||null;
+      const {error}=await sb.from("products").update(row).eq("id",id);
+      if(error) throw error;
+      setStatus("✓ Product updated successfully.","ok");
+    }else{
+      const {error}=await sb.from("products").insert(row);
+      if(error) throw error;
+      setStatus("✓ Product added successfully.","ok");
+    }
+    clearForm(); await loadProducts();
+  }catch(e){
+    setStatus("Save failed: "+e.message,"err");
   }
-
-  if(!finalImage){
-    $("productMsg").textContent=
-      "Please select an image or enter an image URL.";
-    return;
-  }
-
-  const record={
-    name:name,
-    brand:brand,
-    image_url:finalImage,
-    price:price,
-    old_price:oldPrice,
-    description:description
-  };
-
-  let result;
-
-  if(id){
-
-    result=await sb
-      .from("products")
-      .update(record)
-      .eq("id",id);
-
-  }else{
-
-    result=await sb
-      .from("products")
-      .insert(record);
-  }
-
-  if(result.error){
-
-    $("productMsg").textContent=
-      "Save failed: "+result.error.message;
-    return;
-  }
-
-  $("productMsg").textContent=
-    id ? "✓ Product updated." : "✓ Product added.";
-
-  resetForm();
-  loadProducts();
 }
 
-/* ---------- EDIT ---------- */
-
-function editProduct(id){
-
-  const p=products.find(x=>x.id===id);
-
-  if(!p)return;
-
-  $("productId").value=p.id;
-  $("name").value=p.name || "";
-  $("brand").value=p.brand || "JACK";
-  $("price").value=p.price || "";
-  $("oldPrice").value=p.old_price || "";
-  $("imageUrl").value=p.image_url || "";
-  $("description").value=p.description || "";
-
-  $("formTitle").textContent="Edit Product";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+async function editProduct(id){
+  const {data,error}=await sb.from("products").select("*").eq("id",id).single();
+  if(error){setStatus("Edit failed: "+error.message,"err");return;}
+  document.getElementById("editId").value=data.id;
+  document.getElementById("name").value=data.name||"";
+  document.getElementById("brand").value=data.brand||"JACK";
+  document.getElementById("price").value=data.price??"";
+  document.getElementById("oldPrice").value=data.old_price??"";
+  document.getElementById("description").value=data.description||"";
+  document.getElementById("imageUrl").value=data.image_url||"";
+  document.getElementById("images").value="";
+  document.getElementById("formTitle").textContent="Edit Product";
+  editing=true;
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
-/* ---------- DELETE ---------- */
-
 async function deleteProduct(id){
-
-  if(!confirm("Delete this product permanently?")){
-    return;
-  }
-
-  const {error}=await sb
-    .from("products")
-    .delete()
-    .eq("id",id);
-
-  if(error){
-    alert("Delete failed: "+error.message);
-    return;
-  }
-
-  loadProducts();
+  if(!confirm("Delete this product?")) return;
+  const {error}=await sb.from("products").delete().eq("id",id);
+  if(error){setStatus("Delete failed: "+error.message,"err");return;}
+  setStatus("✓ Product deleted successfully.","ok");
+  await loadProducts();
 }
-
-/* ---------- RESET ---------- */
-
-function resetForm(){
-
-  $("productId").value="";
-  $("name").value="";
-  $("brand").value="JACK";
-  $("price").value="";
-  $("oldPrice").value="";
-  $("imageUrl").value="";
-  $("imageFile").value="";
-  $("description").value="";
-  $("formTitle").textContent="Add New Product";
+function clearForm(){
+  document.getElementById("editId").value="";
+  document.getElementById("name").value="";
+  document.getElementById("brand").value="JACK";
+  document.getElementById("price").value="";
+  document.getElementById("oldPrice").value="";
+  document.getElementById("images").value="";
+  document.getElementById("imageUrl").value="";
+  document.getElementById("description").value="";
+  document.getElementById("formTitle").textContent="Add New Product";
+  editing=false;
 }
-
-/* ---------- SETTINGS ---------- */
 
 async function loadSettings(){
-
-  const {data,error}=await sb
-    .from("site_settings")
-    .select("*")
-    .eq("id",1)
-    .maybeSingle();
-
-  if(error){
-    $("settingsMsg").textContent=
-      "Settings table error: "+error.message;
-    return;
-  }
-
+  const {data,error}=await sb.from("site_settings").select("*").eq("id",1).maybeSingle();
+  if(error){setStatus("Settings error: "+error.message,"err");return;}
   if(!data)return;
-
-  $("whatsapp").value=data.whatsapp || "";
-  $("whatsappText").value=data.whatsapp_text || "";
-  $("support").value=data.support || "";
-  $("supportText").value=data.support_text || "";
-  $("delivery").value=data.delivery || "India";
-  $("deliveryText").value=data.delivery_text || "";
-  $("orderHelp").value=data.order_help || "";
-  $("priceHelp").value=data.price_help || "";
-  $("bulkHelp").value=data.bulk_help || "";
+  document.getElementById("whatsapp").value=data.whatsapp||"";
+  document.getElementById("whatsappText").value=data.whatsapp_text||"";
+  document.getElementById("support").value=data.support||"";
+  document.getElementById("supportText").value=data.support_text||"";
+  document.getElementById("delivery").value=data.delivery||"";
+  document.getElementById("deliveryText").value=data.delivery_text||"";
+  document.getElementById("orderHelp").value=data.order_help||"";
+  document.getElementById("priceHelp").value=data.price_help||"";
+  document.getElementById("bulkHelp").value=data.bulk_help||"";
 }
-
 async function saveSettings(){
-
-  const record={
+  const row={
     id:1,
-    whatsapp:$("whatsapp").value.trim(),
-    whatsapp_text:$("whatsappText").value.trim(),
-    support:$("support").value.trim(),
-    support_text:$("supportText").value.trim(),
-    delivery:$("delivery").value.trim(),
-    delivery_text:$("deliveryText").value.trim(),
-    order_help:$("orderHelp").value.trim(),
-    price_help:$("priceHelp").value.trim(),
-    bulk_help:$("bulkHelp").value.trim(),
+    whatsapp:document.getElementById("whatsapp").value.trim(),
+    whatsapp_text:document.getElementById("whatsappText").value.trim(),
+    support:document.getElementById("support").value.trim(),
+    support_text:document.getElementById("supportText").value.trim(),
+    delivery:document.getElementById("delivery").value.trim(),
+    delivery_text:document.getElementById("deliveryText").value.trim(),
+    order_help:document.getElementById("orderHelp").value.trim(),
+    price_help:document.getElementById("priceHelp").value.trim(),
+    bulk_help:document.getElementById("bulkHelp").value.trim(),
     updated_at:new Date().toISOString()
   };
-
-  $("settingsMsg").textContent="Saving…";
-
-  const {error}=await sb
-    .from("site_settings")
-    .upsert(record,{onConflict:"id"});
-
-  if(error){
-
-    $("settingsMsg").textContent=
-      "Settings save failed: "+error.message;
-
-    return;
-  }
-
-  $("settingsMsg").textContent=
-    "✓ Contact & Help settings saved.";
+  const {error}=await sb.from("site_settings").upsert(row,{onConflict:"id"});
+  if(error){setStatus("Settings save failed: "+error.message,"err");return;}
+  setStatus("✓ Contact & Help settings saved.","ok");
 }
-
-/* ---------- SECURITY HELPERS ---------- */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function escapeAttr(value){
-  return escapeHtml(value);
-}
-
-/* ---------- START ---------- */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  initSupabase
-);
+start();
 </script>
-
 </body>
 </html>
