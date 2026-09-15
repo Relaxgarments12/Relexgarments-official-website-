@@ -5,24 +5,4 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://relaxgarments12.github.io/Relexgarments-official-website-/brands.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://relaxgarments12.github.io/Relexgarments-official-website-/products.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://relaxgarments12.github.io/Relexgarments-official-website-/contact.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://relaxgarments12.github.io/Relexgarments-official-website-/help.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
 </urlset>
